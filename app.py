@@ -1,9 +1,7 @@
 import streamlit as st
 import joblib
 import pandas as pd
-import sys
-sys.path.append("/mount/src/moroccan-car-price-predictor")
-from model import predict_price
+from MODEL import predict_price
 import plotly.express as px
 import time
 
@@ -138,9 +136,11 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+
+
 # Load dropdown options
 marques = joblib.load("marque_list.pkl")
-modeles = joblib.load("modele_list.pkl")
+brand_model_dict = joblib.load("brand_model_dict.pkl")
 boites = joblib.load("boite_list.pkl")
 
 # Fix carburants - add Diesel
@@ -204,7 +204,8 @@ with tab1:
     
     with col1:
         marque = st.selectbox("Marque (Brand) 🏭", marques)
-        modele = st.selectbox("Modèle (Model) 📝", modeles)
+        filtered_models = sorted(brand_model_dict.get(marque, []))
+        modele = st.selectbox("Modèle (Model) 📝", filtered_models)
         annee_modele = st.slider("Année modèle (Year) 📅", 1990, 2024, 2015)
         localisation = st.selectbox("Localisation (City) 📍", localisations)
     
