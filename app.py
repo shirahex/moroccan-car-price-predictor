@@ -1,7 +1,7 @@
 import streamlit as st
 import joblib
 import pandas as pd
-from MODEL import predict_price
+from model import predict_price
 import plotly.express as px
 import time
 
