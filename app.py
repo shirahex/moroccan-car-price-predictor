@@ -1,7 +1,9 @@
 import streamlit as st
 import joblib
 import pandas as pd
-from MODEL import predict_price
+import sys
+sys.path.append("/mount/src/moroccan-car-price-predictor")
+from model import predict_price
 import plotly.express as px
 import time
 
